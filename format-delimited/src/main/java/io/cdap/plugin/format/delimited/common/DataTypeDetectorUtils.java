@@ -41,7 +41,12 @@ public class DataTypeDetectorUtils {
    */
   public static void detectDataTypeOfRowValues(Map<String, Schema> override,
                                                DataTypeDetectorStatusKeeper dataTypeDetectorStatusKeeper,
-                                               String[] columnNames, String[] rowValues) {
+                                               String[] columnNames, String[] rowValues) throws RuntimeException {
+    if (rowValues.length < columnNames.length) {
+      throw new RuntimeException(String.format(
+        "Number of values in row (%d) is less than number of values in header (%d)",
+        rowValues.length, columnNames.length));
+    }
     for (int columnIndex = 0; columnIndex < columnNames.length; columnIndex++) {
       String name = columnNames[columnIndex];
       String value = rowValues[columnIndex];

@@ -159,7 +159,7 @@ public class DelimitedConfig extends PathTrackingConfig {
    * @return The detected schema.
    * @throws IOException If the data can't be read from the datasource.
    */
-  public Schema getDefaultSchema(@Nullable FormatContext context) throws IOException {
+  public Schema getDefaultSchema(@Nullable FormatContext context) throws IOException, RuntimeException {
     final String format = getProperties().getProperties().getOrDefault(NAME_FORMAT, "delimited");
     String delimiter = getDefaultDelimiter();
     String regexPathFilter = getProperties().getProperties().get(NAME_REGEX_PATH_FILTER);
@@ -199,6 +199,8 @@ public class DelimitedConfig extends PathTrackingConfig {
       dataTypeDetectorStatusKeeper.validateDataTypeDetector();
     } catch (IOException e) {
       throw new RuntimeException(String.format("Failed to open file at path %s!", path), e);
+    } catch (RuntimeException e) {
+      throw new RuntimeException(String.format("Error occurred while reading sample data: %s", e.getMessage()), e);
     }
     List<Schema.Field> fields = DataTypeDetectorUtils.detectDataTypeOfEachDatasetColumn(getOverride(), columnNames,
             dataTypeDetectorStatusKeeper);
