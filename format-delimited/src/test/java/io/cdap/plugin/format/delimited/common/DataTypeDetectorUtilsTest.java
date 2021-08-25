@@ -96,7 +96,7 @@ public class DataTypeDetectorUtilsTest {
   }
 
   @Test
-  public void testDetectDataTypeOfRowValue() throws RuntimeException {
+  public void testDetectDataTypeOfRowValue() {
     DataTypeDetectorStatusKeeper actualDataTypeDetectorStatusKeeper = new DataTypeDetectorStatusKeeper();
     String[] columnNames = new String[]{"column_A", "column_B", "column_C", "column_D", "column_E", "column_F"};
     String[] rowValues = new String[]{"2", "24L", "3.14", "false", "100.05", "100A"};

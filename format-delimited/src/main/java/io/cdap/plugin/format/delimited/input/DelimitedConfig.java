@@ -159,7 +159,7 @@ public class DelimitedConfig extends PathTrackingConfig {
    * @return The detected schema.
    * @throws IOException If the data can't be read from the datasource.
    */
-  public Schema getDefaultSchema(@Nullable FormatContext context) throws IOException, RuntimeException {
+  public Schema getDefaultSchema(@Nullable FormatContext context) throws IOException {
     final String format = getProperties().getProperties().getOrDefault(NAME_FORMAT, "delimited");
     String delimiter = getDefaultDelimiter();
     String regexPathFilter = getProperties().getProperties().get(NAME_REGEX_PATH_FILTER);
